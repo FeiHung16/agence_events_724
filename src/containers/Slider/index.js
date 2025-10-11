@@ -22,7 +22,7 @@ const Slider = () => {
     <div className="SlideCardList"> {/* Container for the slider */}
       {eventSorted?.map((event, idx) => (
         <div
-          key={event.title}
+          key={event.id || idx} // Use event.id as key for uniqueness
           className={`SlideCard SlideCard--${
             index === idx ? "display" : "hide"
           }`}
@@ -42,7 +42,7 @@ const Slider = () => {
         <div className="SlideCard__pagination">
           {eventSorted?.map((event, radioIdx) => ( // Radio buttons for navigation
             <input
-              key={event.id} // Use event.id as key for uniqueness
+              key={event.id || radioIdx} // Use event.id as key for uniqueness
               type="radio"
               name="radio-button"
               checked={index === radioIdx}
