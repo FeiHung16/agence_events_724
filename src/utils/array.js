@@ -14,7 +14,6 @@ export const sortDescending = (data = []) => {
 // Fonction filterByType pour filtrer un tableau d'objets par une propriété de type chaîne de caractères
 export const filteredByType = ( data, type) => {
    try {
-      console.log(type, data);
       return (data || [] ).filter((event) => !type || event.type === type); // si pas de type selectionné, on affiche tous les événements)
 
    }  catch (error) {
