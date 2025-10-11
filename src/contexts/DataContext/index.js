@@ -4,6 +4,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 
@@ -26,16 +27,29 @@ export const DataProvider = ({ children }) => {
       setError(err);
     }
   }, []);
+
   useEffect(() => {
     if (data) return;
     getData();
   });
   
+// Calculer le dernier event
+  const lastEvent = useMemo(() => {
+    if (data && data.events) {
+      return data.events.reduce((latest, event)  => new Date(event.date) > new Date (latest.date)
+       ? event : latest, data.events[0]
+      )
+    } 
+    return null; 
+  }, [data]);
+
+
   return (
     <DataContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         data,
+        lastEvent,
         error,
       }}
     >
